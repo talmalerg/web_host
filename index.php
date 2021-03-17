@@ -37,7 +37,7 @@
 error_reporting(-1);//report all errors during execution
 
 global $host;
-$host="https://talmalerg.github.io/web_host/";
+$host="https://talmalerg.github.io";
 //$host="http://localhost";
 
 global $realtime_path,$simulation_path;
