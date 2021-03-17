@@ -1,3 +1,32 @@
+<html>
+ <head>
+ <meta name="viewport" content="width=device-width" />
+ <title>WATER PUMP CONTROL</title>
+ </head>
+         <body>
+         MOTOR Control:
+         <form method="get" action="index.php">
+                 <input type="submit" value="ON" name="on">
+                 <input type="submit" value="OFF" name="off">
+         </form>
+         <?php
+         $setmode17 = shell_exec("/usr/local/bin/gpio -g mode 17 out");
+         if(isset($_GET['on'])){
+                 $gpio_on = shell_exec("/usr/local/bin/gpio -g write 17 1");
+                 echo "MOTOR is on";
+                 
+         }
+         else if(isset($_GET['off'])){
+                 $gpio_off = shell_exec("/usr/local/bin/gpio -g write 17 0");
+                 echo "MOTOR is off";
+                
+         }
+         ?>
+         </body>
+</html>
+
+
+
 <?php
 /*
 * Project: Smart Water Tank
@@ -57,13 +86,17 @@ function display_real_time($date){
     global $host;
 
     echo"
-        <p>The dashboard shown below displays real time water level of my house's overhead tank. Tank level is updated every minute on arrival of sensor data. 
+        <p>The dashboard <br> shown below displays real time water level of my house's overhead tank. Tank level is updated every minute on arrival of sensor data. 
         The graph (shown below the tank animation) displays the water level readings for a selected date. 
         Y-axis indicates the volume of water left in the tank and X-axis denotes hours in a day</p>
     ";
     
     echo"<p>Since the real-time data changes marginally in a minute, you may find no change in the tank level. 
     To appreciate the tank animation, check out this <a href='$host/web_host?page=simulation&date=0'>simulation</a>. Or, just check this page again after few hours to notice the change.</p>";
+   
+
+
+    
     
     show_chart_info();
     
